@@ -1,17 +1,17 @@
 version: '3.4'
 services:
 
-  zookeeper3.4:
-    hostname: zookeeper3-4
-    container_name: zookeeper3.4
+  zookeeper3.4.13:
+    hostname: zookeeper3-4-13
+    container_name: zookeeper3.4.13
     image: zookeeper:3.4.13
     restart: always
     ports:
       - 2181:2181
     volumes:
       - /etc/localtime:/etc/localtime:ro # 设置容器时区与宿主机保持一致
-      - /docker/zookeeper3.4/conf/zoo.cfg:/conf/zoo.cfg
-      - /docker/zookeeper3.4/data:/data
-      - /docker/zookeeper3.4/datalog:/datalog
+      - /docker/zookeeper3.4.13/conf/zoo.cfg:/conf/zoo.cfg
+      - /docker/zookeeper3.4.13/data:/data
+      - /docker/zookeeper3.4.13/datalog:/datalog
     environment:
       ZOO_MY_ID: 1

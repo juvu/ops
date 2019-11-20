@@ -1,0 +1,23 @@
+version: '3.4'
+services:
+
+  elasticsearch7.3:
+    image: elasticsearch:7.3.0
+    container_name: elasticsearch7.3
+    hostname: es73-0
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - es73net
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /docker/elasticsearch7.3/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /docker/elasticsearch7.3/data:/usr/share/elasticsearch/data
+      - /docker/elasticsearch7.3/logs:/usr/share/elasticsearch/logs
+    environment:
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"

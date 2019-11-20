@@ -1,0 +1,29 @@
+# 集群名称
+cluster.name: es73-cluster
+# 节点名称
+node.name: es73-0
+# 是否可以成为master节点
+node.master: true
+# 是否允许该节点存储数据,默认开启
+node.data: true
+# 网络绑定
+network.host: 0.0.0.0
+# 设置对外服务的http端口
+http.port: 9200
+# 设置节点间交互的tcp端口
+transport.port: 9300
+# 集群发现
+discovery.seed_hosts:
+  - es73-0
+# 手动指定可以成为 mater 的所有节点的 name 或者 ip，这些配置将会在第一次选举中进行计算
+cluster.initial_master_nodes:
+  - es73-0
+# 发生系统swapping的时候ES节点的性能会非常差，也会影响节点的稳定性。所以要不惜一切代价来避免swapping。
+# swapping会导致Java GC的周期延迟从毫秒级恶化到分钟，更严重的是会引起节点响应延迟甚至脱离集群。
+bootstrap.memory_lock: true
+# 支持跨域访问
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+# 安全认证
+xpack.security.enabled: false
+#http.cors.allow-headers: "Authorization"

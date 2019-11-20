@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+
+  fastdfs:
+    hostname: fastdfs
+    image: qbanxiaoli/fastdfs:latest
+    container_name: fastdfs
+    restart: always
+    environment:
+      - WEB_PORT=8000
+      - FDFS_PORT=22122
+      - IP=172.17.16.7
+    # 使docker具有root权限以读写主机上的目录
+    privileged: true
+    volumes:
+      - /docker/fastdfs:/var/local/fdfs
+    ports:
+      - 8000:8000
+      - 22122:22122
+      - 23000:23000
