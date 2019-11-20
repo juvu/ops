@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+
+  mysql5.7:
+    hostname: mysql5-7
+    container_name: mysql5.7
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # 设置容器时区与宿主机保持一致
+      - /docker/mysql5.7/data:/var/lib/mysql
+      - /docker/mysql5.7/log:/var/log/mysql
+      - /docker/mysql5.7/conf:/etc/mysql/mysql.conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
