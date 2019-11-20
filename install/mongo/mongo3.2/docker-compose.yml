@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+
+  mongo3.2:
+    hostname: mongo3-2
+    image: mongo:3.2
+    container_name: mongo3.2
+    restart: always
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=123456
+    ports:
+      - "27017:27017"
+    volumes:
+      - /docker/mongo3.2/db:/data/db
+      - /docker/mongo3.2/configdb:/data/configdb
+    command: mongod

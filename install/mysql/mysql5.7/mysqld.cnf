@@ -81,7 +81,6 @@ log_error = /var/log/mysql/error.log
 log-output=file
 slow_query_log = 1
 slow_query_log_file = /var/log/mysql/slow.log
-#log-error = error.log
 log_warnings = 2
 long_query_time = 1
 
