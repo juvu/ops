@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+
+  activemq5.14.3:
+    hostname: activemq5-14-3
+    container_name: activemq5.14.3
+    image: webcenter/activemq:5.14.3
+    ports:
+      - 61616:61616
+      - 8161:8161
+    restart: always
+    #environment:
+      #JAVA_OPTS: "$JAVA_OPTS -Dfile.encoding=UTF8  -Duser.timezone=GMT+08"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # 设置容器时区与宿主机保持一致
+      - /docker/activemq5.14.3/data:/data/activemq
+      - /docker/activemq5.14.3/log:/var/log/activemq
