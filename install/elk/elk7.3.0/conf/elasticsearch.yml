@@ -5,24 +5,24 @@ node.name: es73-0
 # 是否可以成为master节点
 node.master: true
 # 是否允许该节点存储数据,默认开启
-node.data: false
+node.data: ture
 # 网络绑定
 network.host: 0.0.0.0
 #network.bind_host: 0.0.0.0
 #设置对外公开的ip
-network.publish_host: 10.10.10.36
+network.publish_host: 192.168.5.160
 # 设置对外服务的http端口
-http.port: 9200
+#http.port: 9200
 # 设置节点间交互的tcp端口
-transport.port: 9300
+#transport.port: 9300
 # 集群发现
 discovery.seed_hosts:
-  - 10.10.10.36:9300
-  - 10.10.10.37:9301
-  - 10.10.10.37:9302
+  - 192.168.5.160:9300
+  - 192.168.5.159:9300
+  - 192.168.5.158:9300
 # 手动指定可以成为 mater 的所有节点的 name 或者 ip，这些配置将会在第一次选举中进行计算
 cluster.initial_master_nodes:
-  - 10.10.10.36:9300
+  - 192.168.5.160:9300
 # 发生系统swapping的时候ES节点的性能会非常差，也会影响节点的稳定性。所以要不惜一切代价来避免swapping。
 # swapping会导致Java GC的周期延迟从毫秒级恶化到分钟，更严重的是会引起节点响应延迟甚至脱离集群。
 bootstrap.memory_lock: true
