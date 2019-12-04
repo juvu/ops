@@ -1,0 +1,54 @@
+version: '3.4'
+services:
+
+  es73-0:
+    image: elasticsearch:7.3.0
+    container_name: es73-0
+    hostname: es73-0
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /docker/elasticsearch73-0/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /docker/elasticsearch73-0/data:/usr/share/elasticsearch/data
+      - /docker/elasticsearch73-0/logs:/usr/share/elasticsearch/logs
+    environment:
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+
+  kibana73:
+    image: kibana:7.3.0
+    container_name: kibana73
+    hostname: kibana73
+    restart: always
+    environment:
+      - I18N_LOCALE=zh-CN
+      - XPACK_GRAPH_ENABLED=true
+      - TIMELION_ENABLED=true
+      - XPACK_MONITORING_COLLECTION_ENABLED="true"
+    volumes:
+      - /docker/kibana73/config:/usr/share/kibana/config
+      #- /docker/kibana73/data:/usr/share/kibana/data
+    depends_on:
+      - es73-0
+    ports:
+      - 5601:5601
+
+  logstash73:
+    container_name: logstash73
+    hostname: logstash73
+    image: logstash:7.3.0
+    command: logstash -f ./conf/logstash-filebeat.conf
+    restart: always
+    volumes:
+      # 映射到容器中
+      - /docker/logstash73/conf/logstash-filebeat.conf:/usr/share/logstash/conf/logstash-filebeat.conf
+      - /docker/logstash73/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+    environment:
+      - elasticsearch.hosts=[http://es73-0:9200]
+    ports:
+      - 5044:5044
